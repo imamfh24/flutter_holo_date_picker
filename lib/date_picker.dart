@@ -132,6 +132,7 @@ class DatePicker {
     ButtonStyle? cancelButtonStyle,
     bool looping = false,
     bool reverse = false,
+    bool withCancelButton = true,
   }) {
     DateTime? _selectedDate = initialDate ?? DateTime.now().startOfDay();
     final List<Widget> listButtonActions = [
@@ -143,14 +144,16 @@ class DatePicker {
           Navigator.pop(context, _selectedDate);
         },
       ),
-      TextButton(
-        style: cancelButtonStyle ??
-            TextButton.styleFrom(foregroundColor: textColor),
-        child: Text(cancelText ?? "Cancel"),
-        onPressed: () {
-          Navigator.pop(context);
-        },
-      )
+      withCancelButton
+          ? TextButton(
+              style: cancelButtonStyle ??
+                  TextButton.styleFrom(foregroundColor: textColor),
+              child: Text(cancelText ?? "Cancel"),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            )
+          : SizedBox(),
     ];
 
     // handle the range of datetime
