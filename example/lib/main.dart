@@ -32,15 +32,16 @@ class MyHomePage extends StatelessWidget {
           ElevatedButton(
             child: Text("open picker dialog"),
             onPressed: () async {
-              var datePicked = await DatePicker.showSimpleDatePicker(
-                context,
-                // initialDate: DateTime(2020),
-                firstDate: DateTime(2020),
-                lastDate: DateTime(2090),
-                dateFormat: "dd-MMMM-yyyy",
-                locale: DateTimePickerLocale.en_us,
-                looping: true,
-              );
+              var datePicked = await DatePicker.showSimpleDatePicker(context,
+                  // initialDate: DateTime(2020),
+                  firstDate: DateTime(2020),
+                  lastDate: DateTime(2090),
+                  dateFormat: "dd-MMMM-yyyy",
+                  locale: DateTimePickerLocale.en_us,
+                  looping: true,
+                  confirmButtonStyle: TextButton.styleFrom(
+                      backgroundColor: Colors.black,
+                      textStyle: TextStyle(color: Colors.white)));
 
               final snackBar =
                   SnackBar(content: Text("Date Picked $datePicked"));

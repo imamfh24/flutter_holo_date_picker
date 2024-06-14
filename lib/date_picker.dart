@@ -108,8 +108,11 @@ class DatePicker {
   /// backgroundColor: [Color] background color of the dialog
   /// itemTextStyle: [TextStyle] item TextStyle of the picker
   /// titleText: [String] text of the dialog's title
+  /// titleTextStyle: [TextStyle] title TextStyle of the picker
   /// confirmText: [String] text of the dialog's confirm button
+  /// confirmButtonStyle: [ButtonStyle] button style of confirm button
   /// cancelText: [String] text of the dialog's  cancel button
+  /// cancelButtonStyle: [ButtonStyle] button style of cancel button
   static Future<DateTime?> showSimpleDatePicker(
     BuildContext context, {
     DateTime? firstDate,
@@ -122,22 +125,27 @@ class DatePicker {
     Color? textColor,
     TextStyle? itemTextStyle,
     String? titleText,
+    TextStyle? titleTextStyle,
     String? confirmText,
+    ButtonStyle? confirmButtonStyle,
     String? cancelText,
+    ButtonStyle? cancelButtonStyle,
     bool looping = false,
     bool reverse = false,
   }) {
     DateTime? _selectedDate = initialDate ?? DateTime.now().startOfDay();
     final List<Widget> listButtonActions = [
       TextButton(
-        style: TextButton.styleFrom(foregroundColor: textColor),
+        style: confirmButtonStyle ??
+            TextButton.styleFrom(foregroundColor: textColor),
         child: Text(confirmText ?? "OK"),
         onPressed: () {
           Navigator.pop(context, _selectedDate);
         },
       ),
       TextButton(
-        style: TextButton.styleFrom(foregroundColor: textColor),
+        style: cancelButtonStyle ??
+            TextButton.styleFrom(foregroundColor: textColor),
         child: Text(cancelText ?? "Cancel"),
         onPressed: () {
           Navigator.pop(context);
@@ -169,7 +177,7 @@ class DatePicker {
     var datePickerDialog = AlertDialog(
       title: Text(
         titleText ?? "Select Date",
-        style: TextStyle(color: textColor),
+        style: titleTextStyle ?? TextStyle(color: textColor),
       ),
       contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 14),
       backgroundColor: backgroundColor,
